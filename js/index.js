@@ -32,20 +32,21 @@ window.addEventListener('scroll', function(){
   const wordsChangeStart = document.querySelector('.words-item.start');
   const wordsChangeEnd = document.querySelector('.words-item.end');
   // 시작위치, 끝위치의 절대좌표를 구한다.
-  let wordsChangeStartY = wordsChangeStart.getBoundingClientRect().top + scroll;
+  // 시작위치는 첫번째 단어의 위치보다 약간 위에서 이벤트 시작하기 위해 임의로 300만큼 빼준다.
+  let wordsChangeStartY = wordsChangeStart.getBoundingClientRect().top + scroll - 300;
   let wordsChangeEndY = wordsChangeEnd.getBoundingClientRect().top + scroll;
   // 단어가 변경되는 구간을 단어 수로 나누어 스크롤 위치에 따라 스타일 적용할 단어를 결정하는 변수
   const division = (wordsChangeEndY - wordsChangeStartY) / words.length;
 
   if(document.querySelector('.on')) document.querySelector('.on').classList.remove('on')
-  if(scroll >= (wordsChangeStartY / 2) && scroll <= wordsChangeEndY) {
+  if(scroll >= wordsChangeStartY && scroll <= wordsChangeEndY) {
     // 스크롤 위치에서 가장 가까운 단어의 인덱스를 구함
     const targetIndex = Math.round((scroll - wordsChangeStartY) / division)
     if(words[targetIndex]) words[targetIndex].classList.add('on');
   }
-
+  console.log(wordsChangeStartY/2, aboutSection.offsetTop)
   const fixedElement = document.querySelector('.about .description');
-  if(scroll >= aboutSection.offsetTop - 100 && scroll < aboutSection.offsetTop + (aboutSection.offsetHeight / 2)) {
+  if(scroll >= aboutSection.offsetTop && scroll < aboutSection.offsetTop + (aboutSection.offsetHeight / 2)) {
     fixedElement.style.opacity = 1;
     fixedElement.style.visibility = 'visible';
   } else {
