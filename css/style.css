@@ -9,15 +9,14 @@
   --gray: #8A8A8A;
 }
 
-html {
-  
-}
 body {
   color: #111;
   font-size: 14px;
   font-family: 'Pretendard';
   background-color: var(--background);
 }
+
+/* 공통 */
 .inner {
   width: 80%;
   max-width: 1440px;
@@ -25,6 +24,26 @@ body {
 }
 .section {
   position: relative;
+}
+.section:not(.main) .title {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 10px;
+  color: var(--black);
+  font-size: 15px;
+  line-height: 25px;
+  text-transform: uppercase;
+}
+.section:not(.main) .title::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 1px;
+  background-color: var(--black);
 }
 .hidden {
   overflow: hidden;
@@ -143,26 +162,6 @@ body {
   visibility: hidden;
   transition: 0.25s;
 }
-.about .description .title {
-  position: relative;
-  padding-left: 40px;
-  margin-bottom: 10px;
-  color: var(--black);
-  font-size: 15px;
-  line-height: 25px;
-  text-transform: uppercase;
-}
-.about .description .title::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 1px;
-  background-color: var(--black);
-}
 .about .description .desc {
   color: rgba(0, 0, 0, 0.7);
   font-size: 1.1rem;
@@ -194,13 +193,39 @@ body {
   position: sticky;
   top: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   height: 100vh;
 }
-.projects .title {
-  font-size: 5rem;
-  font-weight: 700;
+.section.projects .title {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+}
+.projects .scroll-wrap {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+.projects .scroll-wrap .scroll-track {
+  display: flex;
+  align-items: center;
+  animation: infiniteScroll 25s infinite linear;
+}
+@keyframes infiniteScroll {
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.projects .scroll-wrap .scroll-track .scroll-text {
+  position: relative;
+  margin-right: 25px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 100px;
+  white-space: nowrap;
 }
 .projects .project-list {
   display: flex;
@@ -222,12 +247,12 @@ body {
   height: 100%;
   text-align: left;
 }
-.projects .image-wrapper {
+.projects .image-wrap {
   aspect-ratio: 1.5 / 1;
   border-radius: 10px;
   overflow: hidden;
 }
-.projects .project:nth-child(5) .image-wrapper {
+.projects .project:nth-child(5) .image-wrap {
   background-color: var(--white);
 }
 .projects .project-thumbnail img {
@@ -235,7 +260,7 @@ body {
   height: 100%;
   object-fit: cover;
 }
-.projects .thumbnail-title {
+.projects .title-wrap {
   /* display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -243,11 +268,11 @@ body {
   padding: 20px;
   transition: 0.25s;
 }
-.projects .thumbnail-title .title {
+.projects .title-wrap .project-title {
   font-size: 1.4rem;
   font-weight: 700;
 }
-.projects .thumbnail-title .badge {
+.projects .title-wrap .badge {
   display: inline-block;
   max-width: 22px;
   height: 22px;
@@ -268,7 +293,7 @@ body {
     max-width: 999px;
   }
 }
-.projects .thumbnail-title .badge .text {
+.projects .title-wrap .badge .text {
   display: block;
   font-size: 0.857rem;
   opacity: 0;
@@ -299,26 +324,6 @@ body {
   padding: 80px 30px 30px;
   border-radius: 10px;
   background-color: var(--footer-gray);
-}
-.contact .title {
-  position: relative;
-  padding-left: 40px;
-  margin-bottom: 10px;
-  color: var(--black);
-  font-size: 15px;
-  line-height: 25px;
-  text-transform: uppercase;
-}
-.contact .title::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 1px;
-  background-color: var(--black);
 }
 .contact .mail {
   display: inline-block;
