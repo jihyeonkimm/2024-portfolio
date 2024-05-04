@@ -1,7 +1,8 @@
-const menus = document.querySelectorAll('.menu-list .link');
-const sections = document.querySelectorAll('.section');
+const body = document.querySelector('body');
 
 // 메뉴 클릭했을 때 selected 표현 클래스 추가
+const menus = document.querySelectorAll('.menu-list .link');
+const sections = document.querySelectorAll('.section');
 menus.forEach((menu, index) => {
   menu.addEventListener('click', function(){
     // 새로운 배열을 복사
@@ -15,6 +16,7 @@ menus.forEach((menu, index) => {
   })
 })
 
+// about 섹션 내 스크롤 이벤트
 const aboutSection = document.querySelector('.section.about');
 window.addEventListener('scroll', function(){
   let scroll = window.pageYOffset;
@@ -58,4 +60,24 @@ window.addEventListener('scroll', function(){
     fixedElement.style.opacity = 0;
     fixedElement.style.visibility = 'hidden';
   }
+})
+
+// 프로젝트 썸네일 클릭 시 프로젝트 상세페이지 노출 함수
+const projects = document.querySelectorAll('.project');
+projects.forEach((project) => {
+  let thumbnail = project.querySelector('.project-thumbnail');
+  let detail = project.querySelector('.project-detail');
+  let btnClose = project.querySelector('.btn-close');
+  thumbnail.addEventListener('click', function(){
+    detail.classList.add('show');
+    body.classList.add('scroll-lock');
+  })
+  btnClose.addEventListener('click', function(){
+    detail.classList.add('hide');
+    body.classList.remove('scroll-lock');
+    setTimeout(() => {
+      detail.classList.remove('show')
+      detail.classList.remove('hide')
+    }, 2000)
+  })
 })

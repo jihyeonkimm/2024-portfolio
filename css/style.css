@@ -7,6 +7,8 @@
   --black: #1f2426;
   --white: #FFF;
   --gray: #8A8A8A;
+  --header-z-index: 100;
+  --project-z-index: 1000;
 }
 
 body {
@@ -14,6 +16,9 @@ body {
   font-size: 14px;
   font-family: 'Pretendard';
   background-color: var(--background);
+}
+body.scroll-lock {
+  overflow: hidden;
 }
 
 /* 공통 */
@@ -60,7 +65,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  z-index: 100;
+  z-index: var(--header-z-index);
 }
 .header .logo {
   position: absolute;
@@ -236,7 +241,9 @@ body {
 }
 .projects .project {
   position: relative;
-  max-width: 500px;
+  width: 45vw;
+  max-width: 700px;
+  overflow: hidden;
 }
 .projects .project:nth-child(even) {
   align-self: flex-end;
@@ -259,12 +266,12 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: 0.25s;
+}
+.projects .image-wrap:hover img {
+  transform: scale(1.1);
 }
 .projects .title-wrap {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 10px 0; */
   padding: 20px;
   transition: 0.25s;
 }
@@ -308,6 +315,56 @@ body {
     opacity: 1;
     transform: translateY(0px);
   }
+}
+.projects .project-detail {
+  position: fixed;
+  top: -100%;
+  left: -100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  z-index: var(--project-z-index);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  overflow: hidden;
+}
+.projects .project-detail.show {
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity .8s cubic-bezier(.77,0,.175,1);
+}
+.projects .project-detail.hide {
+
+}
+.projects .project-detail .detail-wrap {
+  position: relative;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  background-color: var(--white);
+  transform: translateY(100%);
+}
+.projects .project-detail.show .detail-wrap {
+  transform: translateY(0);
+  transition: transform .8s cubic-bezier(.77,0,.175,1) .8s;
+}
+.projects .project-detail.hide .detail-wrap {
+  transform: translateY(150%);
+  transition: transform .8s cubic-bezier(.77,0,.175,1) .8s;
+}
+.projects .project-detail .btn-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/icon/icon-close.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-size: 0;
 }
 
 /* contact */
