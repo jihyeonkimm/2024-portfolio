@@ -175,7 +175,7 @@ body {
 .about .words-item {
   display: inline;
   color: var(--gray);
-  font-size: 6rem;
+  font-size: 8vw;
   font-weight: 700;
   letter-spacing: -1px;
   opacity: 0.1;
@@ -320,6 +320,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  max-width: unset;
   height: 100%;
   padding: 80px 30px 30px;
   border-radius: 10px;

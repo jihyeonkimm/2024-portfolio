@@ -1,5 +1,7 @@
 const menus = document.querySelectorAll('.menu-list .link');
 const sections = document.querySelectorAll('.section');
+
+// 메뉴 클릭했을 때 selected 표현 클래스 추가
 menus.forEach((menu, index) => {
   menu.addEventListener('click', function(){
     // 새로운 배열을 복사
@@ -16,8 +18,9 @@ menus.forEach((menu, index) => {
 const aboutSection = document.querySelector('.section.about');
 window.addEventListener('scroll', function(){
   let scroll = window.pageYOffset;
-  console.log(scroll)
   let winH = scroll + window.innerHeight;
+
+  // 스크롤 시 각 영역에 해당하는 메뉴에 selected 표현 클래스 추가
   sections.forEach((section, index) => { 
     let sectionTop = section.offsetTop;
     let sectionBottom = sectionTop + section.offsetHeight;
@@ -28,6 +31,7 @@ window.addEventListener('scroll', function(){
     }
   })
 
+  // about 영역에서 스크롤 시 스크롤에 따라 각 단어에 스타일 변화시키는 함수
   const words = document.querySelectorAll('.words-item');
   const wordsChangeStart = document.querySelector('.words-item.start');
   const wordsChangeEnd = document.querySelector('.words-item.end');
@@ -37,16 +41,17 @@ window.addEventListener('scroll', function(){
   let wordsChangeEndY = wordsChangeEnd.getBoundingClientRect().top + scroll;
   // 단어가 변경되는 구간을 단어 수로 나누어 스크롤 위치에 따라 스타일 적용할 단어를 결정하는 변수
   const division = (wordsChangeEndY - wordsChangeStartY) / words.length;
-
+  
   if(document.querySelector('.on')) document.querySelector('.on').classList.remove('on')
   if(scroll >= wordsChangeStartY && scroll <= wordsChangeEndY) {
     // 스크롤 위치에서 가장 가까운 단어의 인덱스를 구함
     const targetIndex = Math.round((scroll - wordsChangeStartY) / division)
     if(words[targetIndex]) words[targetIndex].classList.add('on');
-  }
-  console.log(wordsChangeStartY/2, aboutSection.offsetTop)
+  } 
+
+  // about 영역에서 스크롤 시 고정 영역 노출/미노출 스타일 변화시키는 함수
   const fixedElement = document.querySelector('.about .description');
-  if(scroll >= aboutSection.offsetTop && scroll < aboutSection.offsetTop + (aboutSection.offsetHeight / 2)) {
+  if(scroll >= wordsChangeStartY && scroll <= wordsChangeEndY - 300) {
     fixedElement.style.opacity = 1;
     fixedElement.style.visibility = 'visible';
   } else {
