@@ -244,6 +244,13 @@ body.scroll-lock {
   width: 45vw;
   max-width: 700px;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+}
+.projects .project.active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 0.8s, transform 0.8s;
 }
 .projects .project:nth-child(even) {
   align-self: flex-end;
@@ -289,8 +296,10 @@ body.scroll-lock {
   border: 1px solid var(--black);
   border-radius: 50px;
   background-color: var(--white);
-  animation: badge 2s ease-in forwards;
   overflow: hidden;
+}
+.projects .project.active .title-wrap .badge {
+  animation: badge 2s 0.5s ease-in forwards;
 }
 @keyframes badge {
   0% {
@@ -304,7 +313,9 @@ body.scroll-lock {
   display: block;
   font-size: 0.857rem;
   opacity: 0;
-  animation: badgeTextShow 0.3s 0.8s forwards;
+}
+.projects .project.active .title-wrap .badge .text {
+  animation: badgeTextShow 0.3s 1.5s forwards;
 }
 @keyframes badgeTextShow {
   0% {

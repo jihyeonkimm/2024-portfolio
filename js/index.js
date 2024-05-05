@@ -1,4 +1,6 @@
 const body = document.querySelector('body');
+const aboutSection = document.querySelector('.section.about');
+const projects = document.querySelectorAll('.project');
 
 // 메뉴 클릭했을 때 selected 표현 클래스 추가
 const menus = document.querySelectorAll('.menu-list .link');
@@ -16,8 +18,7 @@ menus.forEach((menu, index) => {
   })
 })
 
-// about 섹션 내 스크롤 이벤트
-const aboutSection = document.querySelector('.section.about');
+// 스크롤 이벤트
 window.addEventListener('scroll', function(){
   let scroll = window.pageYOffset;
   let winH = scroll + window.innerHeight;
@@ -60,10 +61,17 @@ window.addEventListener('scroll', function(){
     fixedElement.style.opacity = 0;
     fixedElement.style.visibility = 'hidden';
   }
+
+  // 프로젝트 영역 내 스크롤 시 각 프로젝트 썸네일 노출
+  projects.forEach((item) => {
+    let itemTop = item.getBoundingClientRect().top + scroll;
+    if(winH > itemTop + (item.offsetHeight / 2)) {
+      item.classList.add('active')
+    }
+  })
 })
 
 // 프로젝트 썸네일 클릭 시 프로젝트 상세페이지 노출 함수
-const projects = document.querySelectorAll('.project');
 projects.forEach((project) => {
   let thumbnail = project.querySelector('.project-thumbnail');
   let detail = project.querySelector('.project-detail');
