@@ -243,14 +243,14 @@ body.scroll-lock {
   position: relative;
   width: 45vw;
   max-width: 700px;
+  margin-top: 20px;
   overflow: hidden;
   opacity: 0;
-  transform: translateY(50px);
 }
 .projects .project.active {
   opacity: 1;
-  transform: translateY(0px);
-  transition: opacity 0.8s, transform 0.8s;
+  margin-top: 0px;
+  transition: 0.8s;
 }
 .projects .project:nth-child(even) {
   align-self: flex-end;
@@ -347,15 +347,14 @@ body.scroll-lock {
   opacity: 1;
   transition: opacity .8s cubic-bezier(.77,0,.175,1);
 }
-.projects .project-detail.hide {
-
-}
 .projects .project-detail .detail-wrap {
   position: relative;
   width: calc(100% - 40px);
   height: calc(100% - 40px);
+  padding: 0 40px;
   background-color: var(--white);
   transform: translateY(100%);
+  overflow-y: auto;
 }
 .projects .project-detail.show .detail-wrap {
   transform: translateY(0);
@@ -366,9 +365,9 @@ body.scroll-lock {
   transition: transform .8s cubic-bezier(.77,0,.175,1) .8s;
 }
 .projects .project-detail .btn-close {
-  position: absolute;
+  position: sticky;
   top: 30px;
-  right: 30px;
+  left: 100%;
   display: block;
   width: 24px;
   height: 24px;
@@ -376,6 +375,38 @@ body.scroll-lock {
   background-size: cover;
   background-repeat: no-repeat;
   font-size: 0;
+}
+.projects .project-detail .title-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0 0;
+}
+.projects .project-detail .title-wrap .detail-title {
+  font-size: 3.815rem;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+.projects .project-detail .title-wrap .text {
+  margin-top: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1rem;
+}
+.projects .project-detail .title-wrap .text-wrap {
+  margin-top: 25px;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.projects .project-detail .content-wrap {
+  margin-top: 5rem;
+}
+.projects .project-detail .content-text-wrap {
+  margin: 30px 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.projects .project-detail .content-img-wrap video {
+  width: 100%;
 }
 
 /* contact */
