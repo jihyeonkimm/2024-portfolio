@@ -27,7 +27,7 @@ window.addEventListener('scroll', function(){
   sections.forEach((section, index) => { 
     let sectionTop = section.offsetTop;
     let sectionBottom = sectionTop + section.offsetHeight;
-    if(scroll >= sectionTop && scroll < sectionBottom) {
+    if(scroll >= sectionTop && scroll < sectionBottom - 100) {
       menus[index].classList.add('selected');
     } else {
       menus[index].classList.remove('selected');
