@@ -658,18 +658,21 @@ body.scroll-lock {
   }
 
   .about .description {
+    position: relative;
+    top: auto;
     left: 0;
     width: 100%;
     padding: 0 20px;
+    margin-bottom: 20vh;
+    transform: translateY(0px);
+    opacity: 1;
+    visibility: visible;
   }
   .about .words {
     padding-left: 0;
   }
   .about .words-item {
     font-size: 144px;
-  }
-  .about .words-item.on {
-    opacity: 0.5;
   }
 
   .projects .project-list {

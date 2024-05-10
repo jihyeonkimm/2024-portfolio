@@ -1,6 +1,17 @@
+const body = document.querySelector('body');
+const aboutSection = document.querySelector('.section.about');
+const projects = document.querySelectorAll('.project');
+const words = document.querySelectorAll('.words-item');
+const wordsChangeStart = document.querySelector('.words-item.start');
+const wordsChangeEnd = document.querySelector('.words-item.end');
+const menus = document.querySelectorAll('.menu-list .link');
+const sections = document.querySelectorAll('.section');
+
 let windowInnerHeight = 0;
 let vh = 0;
+let isMobile = document.documentElement.clientWidth <= 768;
 
+// 모바일 실제 100vh 적용
 function handleResize(){
   let currentInnerHeight = window.innerHeight;
   if(currentInnerHeight !== windowInnerHeight) {
@@ -10,15 +21,26 @@ function handleResize(){
   }
 }
 handleResize();
-window.addEventListener('resize', handleResize)
 
-const body = document.querySelector('body');
-const aboutSection = document.querySelector('.section.about');
-const projects = document.querySelectorAll('.project');
+// resize 이벤트
+window.addEventListener('resize', function(){
+  isMobile = document.documentElement.clientWidth <= 768;
+
+  handleResize();
+  handleAboutSectionScroll();
+})
+
+// 스크롤 이벤트
+window.addEventListener('scroll', function(){
+  let scroll = window.pageYOffset;
+  let winH = scroll + window.innerHeight;
+
+  handleAboutSectionScroll(scroll);
+  menuSelectOnScroll(scroll);
+  showProjectThumbnail(scroll, winH);
+})
 
 // 메뉴 클릭했을 때 selected 표현 클래스 추가
-const menus = document.querySelectorAll('.menu-list .link');
-const sections = document.querySelectorAll('.section');
 menus.forEach((menu, index) => {
   menu.addEventListener('click', function(){
     // 새로운 배열을 복사
@@ -32,27 +54,9 @@ menus.forEach((menu, index) => {
   })
 })
 
-// 스크롤 이벤트
-window.addEventListener('scroll', function(){
-  let scroll = window.pageYOffset;
-  let winH = scroll + window.innerHeight;
-
-  // 스크롤 시 각 영역에 해당하는 메뉴에 selected 표현 클래스 추가
-  sections.forEach((section, index) => { 
-    let sectionTop = section.offsetTop;
-    let sectionBottom = sectionTop + section.offsetHeight;
-    if(scroll >= sectionTop && scroll < sectionBottom - 100) {
-      menus[index].classList.add('selected');
-    } else {
-      menus[index].classList.remove('selected');
-    }
-  })
-
-  // about 영역에서 스크롤 시 스크롤에 따라 각 단어에 스타일 변화시키는 함수
-  const words = document.querySelectorAll('.words-item');
-  const wordsChangeStart = document.querySelector('.words-item.start');
-  const wordsChangeEnd = document.querySelector('.words-item.end');
-  // 시작위치, 끝위치의 절대좌표를 구한다.
+// about 영역에서 스크롤 시 단어 스타일 변화 + 고정 영역 노출/미노출 스타일 변화시키는 함수
+function handleAboutSectionScroll(scroll){
+  // 시작위치, 끝위치의 절대좌표
   // 시작위치는 첫번째 단어의 위치보다 약간 위에서 이벤트 시작하기 위해 임의로 300만큼 빼준다.
   let wordsChangeStartY = wordsChangeStart.getBoundingClientRect().top + scroll - 300;
   let wordsChangeEndY = wordsChangeEnd.getBoundingClientRect().top + scroll;
@@ -66,24 +70,35 @@ window.addEventListener('scroll', function(){
     if(words[targetIndex]) words[targetIndex].classList.add('on');
   } 
 
-  // about 영역에서 스크롤 시 고정 영역 노출/미노출 스타일 변화시키는 함수
   const fixedElement = document.querySelector('.about .description');
-  if(scroll >= wordsChangeStartY && scroll <= wordsChangeEndY - 300) {
-    fixedElement.style.opacity = 1;
-    fixedElement.style.visibility = 'visible';
-  } else {
-    fixedElement.style.opacity = 0;
-    fixedElement.style.visibility = 'hidden';
-  }
+  // isMobile이 true이면 opacity가 1 + visibility가 visible
+  // iisMobile이 false이면 스크롤 범위 내일때만 opacity가 1 + visibility가 visible
+  fixedElement.style.opacity = isMobile ? 1 : (scroll >= wordsChangeStartY && scroll <= wordsChangeEndY - 300) ? 1 : 0;
+  fixedElement.style.visibility = isMobile ? 'visible' : (scroll >= wordsChangeStartY && scroll <= wordsChangeEndY - 300) ? 'visible' : 'hidden';
+}
 
-  // 프로젝트 영역 내 스크롤 시 각 프로젝트 썸네일 노출
+// 스크롤 시 각 영역에 해당하는 메뉴에 selected 표현 클래스 추가
+function menuSelectOnScroll(scroll){
+  sections.forEach((section, index) => { 
+    let sectionTop = section.offsetTop;
+    let sectionBottom = sectionTop + section.offsetHeight;
+    if(scroll >= sectionTop && scroll < sectionBottom - 100) {
+      menus[index].classList.add('selected');
+    } else {
+      menus[index].classList.remove('selected');
+    }
+  })
+}
+
+// 스크롤 시 프로젝트 영역 내 각 프로젝트 썸네일 노출
+function showProjectThumbnail(scroll, winH){
   projects.forEach((item) => {
     let itemTop = item.getBoundingClientRect().top + scroll;
     if(winH > itemTop + (item.offsetHeight / 2)) {
       item.classList.add('active')
     }
   })
-})
+}
 
 // 프로젝트 썸네일 클릭 시 프로젝트 상세페이지 노출 함수
 projects.forEach((project) => {
