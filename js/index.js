@@ -1,3 +1,17 @@
+let windowInnerHeight = 0;
+let vh = 0;
+
+function handleResize(){
+  let currentInnerHeight = window.innerHeight;
+  if(currentInnerHeight !== windowInnerHeight) {
+    windowInnerHeight = currentInnerHeight;
+    vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+}
+handleResize();
+window.addEventListener('resize', handleResize)
+
 const body = document.querySelector('body');
 const aboutSection = document.querySelector('.section.about');
 const projects = document.querySelectorAll('.project');

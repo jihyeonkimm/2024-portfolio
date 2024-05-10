@@ -140,7 +140,7 @@ body.scroll-lock {
 .main {
   width: 100%;
   height: 100vh;
-  /* height: calc(var(--vh, 1vh) * 100); */
+  height: calc(var(--vh, 1vh) * 100);
 }
 .main .inner {
   display: flex;
@@ -231,6 +231,7 @@ body.scroll-lock {
   max-width: 100%;
   margin: 0;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }
 .section.projects .title {
   position: absolute;
@@ -363,6 +364,7 @@ body.scroll-lock {
   align-items: center;
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   z-index: var(--project-z-index);
   backdrop-filter: blur(10px);
   opacity: 0;
@@ -562,6 +564,7 @@ body.scroll-lock {
 /* contact */
 .contact {
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   padding: 30px;
 }
 .contact .inner {
