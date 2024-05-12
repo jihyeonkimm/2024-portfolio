@@ -129,10 +129,6 @@ body.scroll-lock {
   line-height: 30px;
   border-radius: 40px;
 }
-.header .link:hover {
-  color: var(--black);
-  background-color: var(--white);
-}
 .header .link.selected {
   color: var(--black);
   background-color: var(--white);
@@ -653,10 +649,6 @@ body.scroll-lock {
     gap: 0 10px;
     padding: 4px 8px;
   }
-  .header .link:hover {
-    color: var(--white);
-    background-color: transparent;
-  }
 
   .main .title .text {
     font-size: 3.42rem;
@@ -778,5 +770,12 @@ body.scroll-lock {
 
   .about .words-item {
     font-size: 5.71rem;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header .link:hover {
+    color: var(--black);
+    background-color: var(--white);
   }
 }
