@@ -69,6 +69,7 @@ body.scroll-lock {
   background-color: var(--black);
 }
 .hidden {
+  display: inline-block;
   overflow: hidden;
 }
 .work-sans {
@@ -303,6 +304,7 @@ body.scroll-lock {
   text-align: left;
 }
 .projects .image-wrap {
+  display: block;
   aspect-ratio: 1.5 / 1;
   border-radius: 10px;
   overflow: hidden;
@@ -320,6 +322,7 @@ body.scroll-lock {
   transform: scale(1.1);
 }
 .projects .title-wrap {
+  display: block;
   padding: 20px;
   transition: 0.25s;
 }
