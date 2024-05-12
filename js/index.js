@@ -79,19 +79,33 @@ function handleAboutSectionScroll(scroll){
 
 // 스크롤 시 각 영역에 해당하는 메뉴에 selected 표현 클래스 추가
 function menuSelectOnScroll(scroll, winH){
+  // 스크롤이 맨 위에 있을 때
+  if (scroll === 0) {
+    menus[0].classList.add('selected');
+    menus[1].classList.remove('selected');
+    return; // 함수 종료
+  }
+  // 각 섹션에 대해 메뉴에 selected 클래스 추가 또는 제거
   sections.forEach((section, index) => { 
     let sectionTop = section.offsetTop;
     let sectionBottom = sectionTop + section.offsetHeight;
-    if(scroll === 0) {
-      menus[0].classList.add('selected');
-      menus[1].classList.remove('selected');
-    } else if(winH > sectionTop && winH < sectionBottom) {
+    if (winH > sectionTop && winH < sectionBottom) {
       menus[index].classList.add('selected');
     } else {
       menus[index].classList.remove('selected');
     }
-  })
+  });
+  // 마지막 섹션에 도달한 경우
+  if (winH > sections[sections.length - 1].offsetTop) {
+    menus.forEach((menu, index) => {
+      if (index !== sections.length - 1) {
+        menu.classList.remove('selected');
+      }
+    });
+    menus[menus.length - 1].classList.add('selected');
+  }
 }
+
 
 // 스크롤 시 프로젝트 영역 내 각 프로젝트 썸네일 노출
 function showProjectThumbnail(scroll, winH){
