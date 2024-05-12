@@ -653,6 +653,10 @@ body.scroll-lock {
     gap: 0 10px;
     padding: 4px 8px;
   }
+  .header .link:hover {
+    color: var(--white);
+    background-color: transparent;
+  }
 
   .main .title .text {
     font-size: 3.42rem;

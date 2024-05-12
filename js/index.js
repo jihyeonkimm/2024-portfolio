@@ -36,7 +36,7 @@ window.addEventListener('scroll', function(){
   let winH = scroll + window.innerHeight;
 
   handleAboutSectionScroll(scroll);
-  menuSelectOnScroll(scroll);
+  menuSelectOnScroll(scroll, winH);
   showProjectThumbnail(scroll, winH);
 })
 
@@ -78,11 +78,14 @@ function handleAboutSectionScroll(scroll){
 }
 
 // 스크롤 시 각 영역에 해당하는 메뉴에 selected 표현 클래스 추가
-function menuSelectOnScroll(scroll){
+function menuSelectOnScroll(scroll, winH){
   sections.forEach((section, index) => { 
     let sectionTop = section.offsetTop;
     let sectionBottom = sectionTop + section.offsetHeight;
-    if(scroll >= sectionTop && scroll < sectionBottom - 100) {
+    if(scroll === 0) {
+      menus[0].classList.add('selected');
+      menus[1].classList.remove('selected');
+    } else if(winH > sectionTop && winH < sectionBottom) {
       menus[index].classList.add('selected');
     } else {
       menus[index].classList.remove('selected');
