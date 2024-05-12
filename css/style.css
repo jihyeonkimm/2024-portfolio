@@ -327,6 +327,7 @@ body.scroll-lock {
   transition: 0.25s;
 }
 .projects .title-wrap .project-title {
+  display: block;
   color: var(--black);
   font-size: 1.4rem;
   font-weight: 700;
@@ -657,7 +658,7 @@ body.scroll-lock {
     font-size: 3.42rem;
   }
   .main .sub-text {
-    font-size: 22px;
+    font-size: 1.57rem;
   }
 
   .about .description {
@@ -674,8 +675,11 @@ body.scroll-lock {
   .about .words {
     padding-left: 0;
   }
+  .about .words-list {
+    text-align: center;
+  }
   .about .words-item {
-    font-size: 144px;
+    font-size: 10.28rem;
   }
 
   .projects .project-list {
@@ -703,11 +707,11 @@ body.scroll-lock {
     transform: rotate(45deg);
   }
   .projects .project-detail .title-wrap .detail-title {
-    font-size: 36px;
+    font-size: 2.57rem;
     word-break: keep-all;
   }
   .projects .project-detail .title-wrap .text {
-    font-size: 13px;
+    font-size: 0.92rem;
   }
   .projects .project-detail .title-wrap .text-wrap {
     margin-top: 30px;
@@ -715,7 +719,7 @@ body.scroll-lock {
   }
   .projects .project-detail .title-wrap .link {
     margin-top: 4px;
-    font-size: 13px;
+    font-size: 0.92rem;
     text-decoration: underline;
     text-underline-offset: 4px;
   }
@@ -747,16 +751,16 @@ body.scroll-lock {
   }
   .contact .mail {
     align-self: center;
-    font-size: 28px;
+    font-size: 2rem;
   }
   .contact .mail:hover {
     color: rgba(0, 0, 0, 0.5);
   }
   .contact .footer-wrap .copyright {
-    font-size: 12px;
+    font-size: 0.85rem;
   }
   .contact .footer-menu .link {
-    font-size: 12px;
+    font-size: 0.85rem;
   }
   .contact .footer-menu .link:hover {
     color: rgba(0, 0, 0, 0.5);
@@ -765,10 +769,10 @@ body.scroll-lock {
 
 @media all and (max-width: 480px) {
   .header .link {
-    font-size: 12px;
+    font-size: 0.85rem;
   }
 
   .about .words-item {
-    font-size: 80px;
+    font-size: 5.71rem;
   }
 }
