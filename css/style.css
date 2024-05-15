@@ -755,6 +755,9 @@ body.scroll-lock {
   .contact .footer-wrap .copyright {
     font-size: 0.85rem;
   }
+  .contact .footer-menu {
+    gap: 0 16px;
+  }
   .contact .footer-menu .link {
     font-size: 0.85rem;
   }
